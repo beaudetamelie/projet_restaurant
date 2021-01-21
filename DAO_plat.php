@@ -1,6 +1,6 @@
 <?php
 require_once('DTO_plat.php');
-class DAO_Joueur{
+class DAO_plat{
     private $id;
     private $nom ;
     private $nom_menu ;
@@ -28,13 +28,6 @@ class DAO_Joueur{
 
 
 
-public function affiche_prix(){
-
-   		$prix = $_POST['prix'];
-        $requete2 = 'SELECT prix FROM plat';
-        $req = $this->bdd->prepare($requete2);
-        $req ->execute(array($_POST['prix']));
-	}
 
 }
 ?>
