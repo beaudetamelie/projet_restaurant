@@ -1,6 +1,6 @@
 <?php
-require_once('DTO_plat.php');
-class DAO_Joueur{
+require_once('DTO_menu.php');
+class DAO_menu{
     private $id;
     private $nom ;
     private $nom_menu ;
