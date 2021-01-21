@@ -8,11 +8,7 @@ class DAO_menu{
     private $type;
     private $menu;
 
-   /* $id = $_POST['id'];
-    $nom = $_POST['nom'];
-    $nom_menu = $_POST['nom_menu'];
-    $type = $_POST['type'];
-    $menu = $_POST['menu'];*/
+
 
 	public function __construct()
 	{
@@ -25,15 +21,22 @@ class DAO_menu{
 
 	}
 
+function id(){
+    $id = $_POST['id'];
+    $nom = $_POST['nom'];
+    $prix = $_POST['prix'];
+    $nom_menu = $_POST['nom_menu'];
+    $type = $_POST['type'];
+    $menu = $_POST['menu'];
 
-
+}
 
 public function affiche_prix(){
 
-   		$prix = $_POST['prix'];
-        $requete2 = 'SELECT prix FROM plat';
+   
+        $requete2 = 'SELECT prix FROM menu';
         $req = $this->bdd->prepare($requete2);
-        $req ->execute(array($_POST['prix']));
+        $req ->execute(array());
 	}
 
 }
