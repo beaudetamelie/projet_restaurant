@@ -3,10 +3,10 @@ session_start();
 
 require_once('DAO_menu.php'); 
 require_once('DAO_plat.php');
-$demande_prix = new DAO_menu('Localhost', 'amelie_menurestaurant', 'amelie', 1234);
-$demande_prix->affiche_prix();
+$demande_prix = new PDO('mysql:host=Localhost; dbname=amelie_menurestaurant;charset=utf8';'amelie', '1234');
+$afficher = $demande_prix->query('SELECT prix FROM menu');
    
- 
+ echo $afficher;
 ?>
 
 
@@ -16,7 +16,13 @@ $demande_prix->affiche_prix();
 	<title>coucou</title>
 </head>
 <body>
-<p>coucou</p>
+<p>Entrées</p>
+<? 
+   
+?>
+<p>Plats</p>
+<p>Desserts</p>
+
 
 
 
