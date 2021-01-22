@@ -17,7 +17,7 @@ class DAO_plat{
 	public function __construct()
 	{
 		try{
-			$this->bdd = new PDO('mysql:host=localhost;dbname=amelie_menurestaurant;','amelie', '1234');
+			$bdd = new PDO('mysql:host=localhost;dbname=amelie_menurestaurant;','amelie', '1234');
 	
 		}catch(Exception $e){
 			die('Erreur : ' . $e->getMessage());

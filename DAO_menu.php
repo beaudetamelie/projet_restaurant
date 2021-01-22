@@ -13,7 +13,7 @@ class DAO_menu{
 	public function __construct()
 	{
 		try{
-			$this->bdd = new PDO('mysql:host=localhost;dbname=amelie_menurestaurant;','amelie', '1234');
+			$bdd = new PDO('mysql:host=localhost;dbname=amelie_menurestaurant;','amelie', '1234');
 	
 		}catch(Exception $e){
 			die('Erreur : ' . $e->getMessage());
@@ -31,12 +31,14 @@ function id(){
 
 }
 
-public function affiche_prix(){
-
-   
-        $requete2 = 'SELECT prix FROM menu';
-        $req = $this->bdd->prepare($requete2);
-        $req ->execute(array());
+public function affiche_prix_menu(){
+    $req = $bdd->prepare('SELECT nom_menu, prix FROM menu');
+    $req->execute(array());
+while ($donnees = $req->fetch())
+{
+       echo $donnees['nom_menu'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
+}
+$req->closeCursor();
 	}
 
 }
