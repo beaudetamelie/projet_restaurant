@@ -23,6 +23,13 @@ while ($donnees = $req->fetch())
 
 //requete affiche prix des entrée
 
+$requete3 = ("SELECT nom, FROM menu JOIN plat ON 'menu.nom_menu' = 'plat.menu'");
+$req = $bdd->prepare($requete3);
+$req->execute(array());
+while ($donnees1 = $req->fetch())
+{
+       echo $donnees1['nom'] . 'euros <br/>';
+}
 
 ?>
 

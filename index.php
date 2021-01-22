@@ -10,18 +10,13 @@ catch(Exception $e)
 {
        die('Erreur : '.$e->getMessage());
 }
-
-//requete affiche prix + nom menu
-$requete1 = ('SELECT nom_menu, prix FROM menu');
-$req = $bdd->prepare($requete1);
-$req->execute(array());
+  $requete2 = ("SELECT  nom, prix FROM plat ORDER BY type");
+   	   $req = $bdd->prepare($requete2);
+	   $req->execute(array());
 while ($donnees = $req->fetch())
 {
-       echo $donnees['nom_menu'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
+       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
 }
-
-//requete affiche prix des entrée
-
 
 
 ?>
@@ -33,20 +28,12 @@ while ($donnees = $req->fetch())
 	<title>coucou</title>
 </head>
 <body>
-	<?php
-	   $requete2 = ("SELECT nom, prix FROM plat WHERE type = entrée");
-   	   $req = $bdd->prepare($requete2);
-	   $req->execute(array());
-while ($donnees = $req->fetch())
-{
-       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
-}
-	?>
+	
 <p>Entrées</p>
 
 <p>Plats</p>
 <p>Desserts</p>
-
+<a href="menu.php">Accès aux menus</a>
 
 
 
