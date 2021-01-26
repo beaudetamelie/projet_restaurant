@@ -12,12 +12,15 @@ class DAO_menu{
 
 	public function __construct()
 	{
-		try{
-			$bdd = new PDO('mysql:host=t59in.myd.infomaniak.com;dbname=t59in_amelie','t59in_amelie', 'AB@69400villle');
-	
-		}catch(Exception $e){
-			die('Erreur : ' . $e->getMessage());
-		}
+		try
+       {
+              $bdd = new PDO('mysql:host=localhost;dbname=menu_restaurant', 'root', '');
+       }
+              catch (Exception $e)
+       {
+              die('Erreur : ' . $e->getMessage());
+       }
+
 
 	}
 

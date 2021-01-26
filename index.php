@@ -3,20 +3,15 @@ session_start();
 require_once('DAO_menu.php');
 require_once('DAO_plat.php');
 require_once('DAO_allergene.php');
-try{
-       $bdd = new PDO('mysql:host=localhost;dbname=amelie_menurestaurant', 'amelie', 1234);
-}
-catch(Exception $e)
-{
-       die('Erreur : '.$e->getMessage());
-}
-  $requete2 = ("SELECT  nom, prix FROM plat ORDER BY type");
-   	   $req = $bdd->prepare($requete2);
-	   $req->execute(array());
-while ($donnees = $req->fetch())
-{
-       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
-}
+try
+       {
+              $bdd = new PDO('mysql:host=localhost;dbname=menu_restaurant', 'root', '');
+       }
+              catch (Exception $e)
+       {
+              die('Erreur : ' . $e->getMessage());
+       }
+  
 
 
 ?>
@@ -29,10 +24,35 @@ while ($donnees = $req->fetch())
 </head>
 <body>
 	
-<p>Entrées</p>
+<p><strong><i>Entrées</i></strong></p>
+<?php  $requete4 = ("SELECT  nom, prix FROM plat WHERE type = 'entree'");
+   	   $req = $bdd->prepare($requete4);
+	   $req->execute(array());
+while ($donnees = $req->fetch())
+{
+       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
+}
+?>
+<p><strong><i>Plats</i></strong></p>
+<?php  $requete5 = ("SELECT  nom, prix FROM plat WHERE type = 'plat'");
+   	   $req = $bdd->prepare($requete5);
+	   $req->execute(array());
+while ($donnees = $req->fetch())
+{
+       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
+}
+?>
+<p><strong><i>Desserts</i></strong></p>
+<?php  $requete6 = ("SELECT  nom, prix FROM plat WHERE type = 'dessert'");
+   	   $req = $bdd->prepare($requete6);
+	   $req->execute(array());
+while ($donnees = $req->fetch())
+{
+       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
+}
 
-<p>Plats</p>
-<p>Desserts</p>
+?>
+<br/>
 <a href="menu.php">Accès aux menus</a>
 
 

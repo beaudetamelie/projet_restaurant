@@ -1,34 +1,38 @@
-
 <?php
 session_start();
 require_once('DAO_menu.php');
 require_once('DAO_plat.php');
 require_once('DAO_allergene.php');
-try{
-       $bdd = new PDO('mysql:host=localhost;dbname=amelie_menurestaurant', 'amelie', 1234);
-}
-catch(Exception $e)
-{
-       die('Erreur : '.$e->getMessage());
-}
+try
+       {
+              $bdd = new PDO('mysql:host=localhost;dbname=menu_restaurant', 'root', '');
+       }
+              catch (Exception $e)
+       {
+              die('Erreur : ' . $e->getMessage());
+       }
+  
+
+
+
 
 //requete affiche prix + nom menu
-$requete1 = ('SELECT nom_menu, prix FROM menu');
-$req = $bdd->prepare($requete1);
+/*$requete7 = ('SELECT nom_menu, prix FROM menu');
+$req = $bdd->prepare($requete7);
 $req->execute(array());
 while ($donnees = $req->fetch())
 {
        echo $donnees['nom_menu'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
 }
-
+*/
 //requete affiche prix des entrée
 
-$requete3 = ("SELECT nom, FROM menu JOIN plat ON 'menu.nom_menu' = 'plat.menu'");
+$requete3 = ("SELECT 'menu_nom' FROM menu, plat WHERE 'menu.nom_menu' = 'plat.menu'");
 $req = $bdd->prepare($requete3);
 $req->execute(array());
-while ($donnees1 = $req->fetch())
+while ($donnees = $req->fetch())
 {
-       echo $donnees1['nom'] . 'euros <br/>';
+       echo $donnees['nom'] . 'euros <br/>';
 }
 
 ?>
@@ -39,6 +43,6 @@ while ($donnees1 = $req->fetch())
 	<title></title>
 </head>
 <body>
-
+<a href="index.php">Accès aux plats individuels</a>
 </body>
 </html>
