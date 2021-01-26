@@ -6,7 +6,7 @@ class DAO_allergene{
    public function __construct()
 	{
 		try{
-			$bdd = new PDO('mysql:host=localhost;dbname=amelie_menurestaurant;','amelie', '1234');
+			$bdd = new PDO('mysql:host=t59in.myd.infomaniak.com;dbname=t59in_amelie','t59in_amelie', 'AB@69400villle');
 	
 		}catch(Exception $e){
 			die('Erreur : ' . $e->getMessage());
