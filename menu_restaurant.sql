@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.6
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : t59in.myd.infomaniak.com
--- Généré le :  mar. 26 jan. 2021 à 11:43
--- Version du serveur :  5.7.30-log
--- Version de PHP :  7.4.14
+-- Hôte : 127.0.0.1
+-- Généré le : mer. 27 jan. 2021 à 14:01
+-- Version du serveur :  10.4.17-MariaDB
+-- Version de PHP : 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `t59in_amelie`
+-- Base de données : `menu_restaurant`
 --
 
 -- --------------------------------------------------------
