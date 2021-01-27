@@ -11,7 +11,6 @@ try
        {
               die('Erreur : ' . $e->getMessage());
        }
-  
 
 
 ?>
@@ -51,6 +50,16 @@ while ($donnees = $req->fetch())
        echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
 }
 
+?>
+<p><strong><i>Plats végérariens</i></strong></p>
+<?php
+$requete10 = ("SELECT  nom, prix FROM plat WHERE vegetarien = '1'");
+   	   $req = $bdd->prepare($requete10);
+	   $req->execute(array());
+while ($donnees = $req->fetch())
+{
+       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
+}
 ?>
 <br/>
 <a href="menu.php">Accès aux menus</a>
