@@ -1,70 +1,20 @@
-<?php
-session_start();
-require_once('DAO_menu.php');
-require_once('DAO_plat.php');
-require_once('DAO_allergene.php');
-try
-       {
-              $bdd = new PDO('mysql:host=localhost;dbname=menu_restaurant', 'root', '');
-       }
-              catch (Exception $e)
-       {
-              die('Erreur : ' . $e->getMessage());
-       }
-
-
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>coucou</title>
+	<title>Page d'accueil</title>
+	<link rel="stylesheet" type="text/css" href='style.css'"  />
 </head>
 <body>
-	
-<p><strong><i>Entrées</i></strong></p>
-<?php  $requete4 = ("SELECT  nom, prix FROM plat WHERE type = 'entree'");
-   	   $req = $bdd->prepare($requete4);
-	   $req->execute(array());
-while ($donnees = $req->fetch())
-{
-       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
-}
-?>
-<p><strong><i>Plats</i></strong></p>
-<?php  $requete5 = ("SELECT  nom, prix FROM plat WHERE type = 'plat'");
-   	   $req = $bdd->prepare($requete5);
-	   $req->execute(array());
-while ($donnees = $req->fetch())
-{
-       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
-}
-?>
-<p><strong><i>Desserts</i></strong></p>
-<?php  $requete6 = ("SELECT  nom, prix FROM plat WHERE type = 'dessert'");
-   	   $req = $bdd->prepare($requete6);
-	   $req->execute(array());
-while ($donnees = $req->fetch())
-{
-       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
-}
+<h1>Bienvenue sur le site de notre restaurant<i> <br/>Histoire de Manger</i> ! </h1>
+<p class="horaire"><br/>Histoire de Manger - 270 rue Pierre - 69400 Villefranche-Sur-Saône
+Ouvert du mardi au samedi midi et soir - Pensez à réserver au 01 23 45 67 89<br/><br/></p>
 
-?>
-<p><strong><i>Plats végérariens</i></strong></p>
-<?php
-$requete10 = ("SELECT  nom, prix FROM plat WHERE vegetarien = '1'");
-   	   $req = $bdd->prepare($requete10);
-	   $req->execute(array());
-while ($donnees = $req->fetch())
-{
-       echo $donnees['nom'] . ' ...........' . $donnees['prix'] . 'euros <br/>';
-}
-?>
-<br/>
-<a href="menu.php">Accès aux menus</a>
-
-
-
+<img
+    src="image/brick-wall-1834784_1280.jpg"
+    height="800px"
+    width="1300px"
+/><br/><br/>
+<button class="bouton"><a href=plats.php>Plats individuels</a></button>
+<button class="bouton"><a href="menu.php">Menus</a></button>
 </body>
 </html>

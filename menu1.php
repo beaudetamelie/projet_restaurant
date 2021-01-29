@@ -32,32 +32,32 @@ try
 </head>
 <body>
 	<h1>Menus à la carte</h1>
-	<p class="titre"><strong><i>Menu Terroir</i></strong><br/>
-<?php
-//afficher prix menu terroir
-	$requete7 = ("SELECT prix FROM menu WHERE nomMenu = ?");
-	$req = $bdd->prepare($requete7);
-	$req->execute(['Terroir']);
+	
+	<br/><p class="titre"><strong><i>Menu Tradition</i></strong><br/>
+	<?php
+	$requete8 = ("SELECT prix FROM menu WHERE nomMenu = ? ");
+	$req = $bdd->prepare($requete8);
+	$req->execute(['Tradition']);
 	while ($donnees = $req->fetch())
-		{
-       		echo $donnees['prix'] . 'euros <br/><br/>';
-		}?></p><p class="requete">
+		{	
+	       echo $donnees['prix'] . 'euros <br/><br/>';
+		}
+?>
+</p><p class="requete">
 <?php
-//afficher plat menu terroir
- 	$requete3 = ("SELECT nomPlat FROM menu, plat_menu, plat WHERE menu.id_menu= plat_menu.id_menu AND  plat.id_plat = plat_menu.id_plat AND nomMenu = ?");
-	$req = $bdd->prepare($requete3);
-	$req->execute([ 'Terroir']);
+	//afficher plats contenu menu Tradition
+ 	$requete9 = ("SELECT nomPlat FROM menu, plat_menu, plat WHERE menu.id_menu= plat_menu.id_menu AND  plat.id_plat = plat_menu.id_plat AND nomMenu = ?");
+	$req = $bdd->prepare($requete9);
+	$req->execute([ 'Tradition']);
 	while ($donnees = $req->fetch())
 		{
       		echo $donnees['nomPlat'] . '<br/>';
 		}
-	
 
-//affiche prix menu tradition
-	?></p>
-	<br/>
-	<br/>
-	<button class="bouton"><a href="menu1.php">Menu suivant</a></button>
+?></p>
+<br/>
+<br/>
+	<button class="bouton"><a href="menu.php">Menu précédent</a></button>
 	<br/>
 	<br/>
 	<br/>
