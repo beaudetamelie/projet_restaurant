@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 27 jan. 2021 à 14:01
+-- Généré le : ven. 29 jan. 2021 à 18:26
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.1
 
@@ -29,14 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `allergene` (
   `id_allergene` int(11) NOT NULL,
-  `nom` varchar(200) COLLATE utf16_bin NOT NULL
+  `nomAllergene` varchar(200) COLLATE utf16_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
 --
 -- Déchargement des données de la table `allergene`
 --
 
-INSERT INTO `allergene` (`id_allergene`, `nom`) VALUES
+INSERT INTO `allergene` (`id_allergene`, `nomAllergene`) VALUES
 (1, 'Arachide '),
 (2, 'Lait '),
 (3, 'Poisson '),
@@ -50,7 +50,7 @@ INSERT INTO `allergene` (`id_allergene`, `nom`) VALUES
 
 CREATE TABLE `menu` (
   `id_menu` int(10) NOT NULL,
-  `nom` varchar(200) NOT NULL,
+  `nomMenu` varchar(200) NOT NULL,
   `prix` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -58,7 +58,7 @@ CREATE TABLE `menu` (
 -- Déchargement des données de la table `menu`
 --
 
-INSERT INTO `menu` (`id_menu`, `nom`, `prix`) VALUES
+INSERT INTO `menu` (`id_menu`, `nomMenu`, `prix`) VALUES
 (1, 'Terroir', 24),
 (2, 'Tradition', 30);
 
@@ -70,7 +70,7 @@ INSERT INTO `menu` (`id_menu`, `nom`, `prix`) VALUES
 
 CREATE TABLE `plat` (
   `id_plat` int(10) NOT NULL,
-  `nom` varchar(200) NOT NULL,
+  `nomPlat` varchar(200) NOT NULL,
   `prix` float NOT NULL,
   `vegetarien` int(11) NOT NULL,
   `type` varchar(200) NOT NULL
@@ -80,7 +80,7 @@ CREATE TABLE `plat` (
 -- Déchargement des données de la table `plat`
 --
 
-INSERT INTO `plat` (`id_plat`, `nom`, `prix`, `vegetarien`, `type`) VALUES
+INSERT INTO `plat` (`id_plat`, `nomPlat`, `prix`, `vegetarien`, `type`) VALUES
 (1, 'Croustillant de fourme d’Ambert aux poires et noix', 11, 1, 'entree'),
 (2, 'Moelleux de topinambours, salade au magret séché', 12.5, 0, 'entree'),
 (3, 'Foie gras de canard mi cuit aux figues moelleuses', 16, 0, 'entree'),
