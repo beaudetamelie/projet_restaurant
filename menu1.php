@@ -1,8 +1,6 @@
 <?php
 session_start();
-require_once('DAO_menu.php');
-require_once('DAO_plat.php');
-require_once('DAO_allergene.php');
+
 try
        {
               $bdd = new PDO('mysql:host=localhost;dbname=menu_restaurant', 'root', '');
