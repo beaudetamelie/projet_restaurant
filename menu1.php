@@ -31,7 +31,16 @@ try
 <body>
 	<h1>Menus à la carte</h1>
 	
-	<br/><p class="titre"><strong><i>Menu Tradition</i></strong><br/>
+	<br/><p class="titre"><strong><i><?php
+	$requeteI = "SELECT nomMenu FROM menu WHERE nomMenu = ?";
+	$req = $bdd->prepare($requeteI);
+	$req->execute(['Tradition']);
+	while ($donnees = $req->fetch())
+		{
+			//on affiche le prix
+       		echo $donnees['nomMenu'];
+		}
+		?></i></strong><br/>
 	<?php
 	$requete8 = ("SELECT prix FROM menu WHERE nomMenu = ? ");
 	$req = $bdd->prepare($requete8);

@@ -90,7 +90,7 @@ $req = $bdd->prepare($requeteA);
  if (isset ($_POST['ok'])){
 $nomPlatSuppr = $_POST['nomPlatSuppr'];
 
-$requeteB = "DELETE FROM plat WHERE nomPlat = ? ";
+$requeteB = "DELETE * FROM plat WHERE (SELECT id_plat FROM plat_menu WHERE  nomPlat = ?)  ";
 $req = $bdd->prepare($requeteB);
 	   $req->execute([$nomPlatSuppr]);
 }
@@ -227,12 +227,40 @@ $req = $bdd->prepare($requeteE);
 if (isset ($_POST['validerAjoutPlat'])){
 $nomMenuAj = $_POST['nomMenuAj'];
 $nomPlatAj = $_POST['nomPlatAj'];
-$requeteF = "INSERT INTO plat_menu(id_plat, id_menu) VALUES SELECT id_plat, id_menu FROM menu, plat_menu, plat WHERE menu.id_menu= plat_menu.id_menu AND  plat.id_plat = plat_menu.id_plat AND nomPlatAj = ? AND nomMenuAj = ?";
+$requeteF = "INSERT INTO plat_menu(id_plat, id_menu) VALUES ((SELECT id_plat FROM plat WHERE nomPlat = ?), (SELECT id_menu FROM menu WHERE nomMenu = ?))";
 	$req = $bdd->prepare($requeteF);
 	   $req->execute([$nomPlatAj, $nomMenuAj]);}
 
 ?>
 
+<p><strong><i>Modifier un menu</i></strong></p>
+<p>Vous souhaitez modifier le plat d'un menu</p>
+<form action="admin.php" method="post">
+    <div>
+        <label for="nomPlatAModifSuppr">Nom du plat à suppimer du menu :</label>
+        <input type="text" id="nomPlatAModifSuppr" name="nomPlatAModifSuppr">
+    </div>
+    <br/>
+    <div>
+        <label for="nomPlatModifAjout">Nom du plat à ajouter (déja existant) dans un menu :</label>
+        <input type="text" id="nomPlatModifAjout" name="nomPlatModifAjout">
+    </div>
+    <br/>
+    <div>
+    	 <label for="type"></label>
+        <input type="submit" id="okModifMenu" name="okModifMenu">
+    </div>
+</form>
+
+<?php
+if (isset ($_POST['okModifMenu'])){
+	$nomPlatModifAjout = $_POST['nomPlatModifAjout'];
+	$nomPlatAModifSuppr = $_POST['nomPlatAModifSuppr'];
+$requeteC = "UPDATE plat_menu, plat SET nomPlat = SELECT id_plat FROM plat_menu, plat WHERE plat.id_plat = plat_menu.id_plat AND nomPlat = ? ,  nomPlat = ?WHERE nomPlat = ? ";
+$req = $bdd->prepare($requeteC);
+	   $req->execute([$nomPlatModifAjout,$nomPlatModifAjout, $nomPlatAModifSuppr]);
+}
+?>
 
 
 
