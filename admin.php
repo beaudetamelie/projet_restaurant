@@ -90,10 +90,13 @@ $req = $bdd->prepare($requeteA);
  if (isset ($_POST['ok'])){
 $nomPlatSuppr = $_POST['nomPlatSuppr'];
 
-$requeteB = "DELETE * FROM plat WHERE (SELECT id_plat FROM plat_menu WHERE  nomPlat = ?)  ";
+$requeteB = "DELETE plat, plat_menu, plat_allergene FROM ((plat INNER JOIN plat_menu ON plat.id_plat = plat_menu.id_plat_menu) INNER JOIN plat_allergene ON plat.id_plat = plat_allergene.id_plat_allergene)   WHERE nomPlat= ?";
 $req = $bdd->prepare($requeteB);
 	   $req->execute([$nomPlatSuppr]);
+
+	   
 }
+
 ?>
 
 
@@ -179,12 +182,7 @@ $req = $bdd->prepare($requeteD);
         <label for="prixMenu"class="form">Prix du menu :</label>
         <input type="text" id="prixMenu" name="prixMenu" >
     </div>
-    <br/>
-    
-     <div>
-        <label for="nomPlatAjout" class="form">Nom du plat :</label>
-        <input type="text" id="nomPlatAjout" name="nomPlatAjout" >
-    </div>
+   
     <br/>
     <div>
     	 <label for="type"class="form"></label>
@@ -197,7 +195,6 @@ $req = $bdd->prepare($requeteD);
 if (isset ($_POST['validerAjout'])){
 $nomMenuAjout = $_POST['nomMenuAjout'];
 $prixMenu = $_POST['prixMenu'];
-$nomPlatAjout = $_POST['nomPlatAjout'];
 $requeteE = "INSERT INTO menu (id_menu, nomMenu, prix) VALUES(?, ?, ?)";
 $req = $bdd->prepare($requeteE);
 	   $req->execute([NULL, $nomMenuAjout, $prixMenu]);
@@ -227,22 +224,22 @@ $req = $bdd->prepare($requeteE);
 if (isset ($_POST['validerAjoutPlat'])){
 $nomMenuAj = $_POST['nomMenuAj'];
 $nomPlatAj = $_POST['nomPlatAj'];
-$requeteF = "INSERT INTO plat_menu(id_plat, id_menu) VALUES ((SELECT id_plat FROM plat WHERE nomPlat = ?), (SELECT id_menu FROM menu WHERE nomMenu = ?))";
+$requeteF = "INSERT INTO plat_menu(id_plat_menu, id_menu_menu) VALUES ((SELECT id_plat FROM plat WHERE nomPlat = ?), (SELECT id_menu FROM menu WHERE nomMenu = ?))";
 	$req = $bdd->prepare($requeteF);
 	   $req->execute([$nomPlatAj, $nomMenuAj]);}
 
 ?>
 
 <p><strong><i>Modifier un menu</i></strong></p>
-<p>Vous souhaitez modifier le plat d'un menu</p>
+<p>Vous souhaitez modifier le nom d'un plat d'un menu</p>
 <form action="admin.php" method="post">
     <div>
-        <label for="nomPlatAModifSuppr">Nom du plat à suppimer du menu :</label>
+        <label for="nomPlatAModifSuppr">Nom du plat à changer dans le menu :</label>
         <input type="text" id="nomPlatAModifSuppr" name="nomPlatAModifSuppr">
     </div>
     <br/>
     <div>
-        <label for="nomPlatModifAjout">Nom du plat à ajouter (déja existant) dans un menu :</label>
+        <label for="nomPlatModifAjout">Nom du plat changé dans le menu :</label>
         <input type="text" id="nomPlatModifAjout" name="nomPlatModifAjout">
     </div>
     <br/>
@@ -256,9 +253,9 @@ $requeteF = "INSERT INTO plat_menu(id_plat, id_menu) VALUES ((SELECT id_plat FRO
 if (isset ($_POST['okModifMenu'])){
 	$nomPlatModifAjout = $_POST['nomPlatModifAjout'];
 	$nomPlatAModifSuppr = $_POST['nomPlatAModifSuppr'];
-$requeteC = "UPDATE plat_menu, plat SET nomPlat = SELECT id_plat FROM plat_menu, plat WHERE plat.id_plat = plat_menu.id_plat AND nomPlat = ? ,  nomPlat = ?WHERE nomPlat = ? ";
+$requeteC = "UPDATE plat, plat_menu SET nomPlat = ? WHERE plat.id_plat = plat_menu.id_plat_menu AND nomPlat = ?";
 $req = $bdd->prepare($requeteC);
-	   $req->execute([$nomPlatModifAjout,$nomPlatModifAjout, $nomPlatAModifSuppr]);
+	   $req->execute([$nomPlatModifAjout, $nomPlatAModifSuppr]);
 }
 ?>
 
@@ -287,6 +284,67 @@ $req = $bdd->prepare($requeteG);
 	   $req->execute([$nomMenuSuppr]);
 }
 ?>
+
+
+<p><strong><i>Ajouter  un allergene</i></strong></p>
+	<form action="admin.php" method="post">
+		
+    <div>
+        <label for="nomAllergeneAjout" class="form">Nom de l'allergène :</label>
+        <input type="text" id="nomallergeneAjout" name="nomAllergeneAjout" >
+    </div>
+    <br/>
+ 
+    <div>
+    	 <label for="type"class="form"></label>
+        <input type="submit" id="validerAjoutAllergene" name="validerAjoutAllergene" >
+     </div>
+     <br/>
+</form>
+
+<?php
+if (isset ($_POST['validerAjoutAllergene'])){
+$nomAllergeneAjout = $_POST['nomAllergeneAjout'];
+$requeteJ = "INSERT INTO allergene (id_allergene, nomAllergene) VALUES(?, ?)";
+$req = $bdd->prepare($requeteJ);
+	   $req->execute([NULL, $nomAllergeneAjout]);
+}?>
+
+
+
+
+
+
+<p>Ajouter un allergène dans un plat</p>
+<form action="admin.php" method="post"> 
+	 <div>
+        <label for="nomAllergeneAj" class="form">Nom de l'allergène :</label>
+        <input type="text" id="nomAllergeneAj" name="nomAllergeneAj" >
+    </div>
+    <br/>
+	<div>
+        <label for="nomPlatAjout" class="form">Nom du plat :</label>
+        <input type="text" id="nomPlatAjout" name="nomPlatAjout" >
+    </div>
+    <br/>
+    <div>
+    	 <label for="type"class="form"></label>
+        <input type="submit" id="validerAjoutAllergenePlat" name="validerAjoutAllergenePlat" >
+     </div>
+     <br/>
+</form>
+<?php
+if (isset ($_POST['validerAjoutAllergenePlat'])){
+$nomAllergeneAj = $_POST['nomAllergeneAj'];
+$nomPlatAjout = $_POST['nomPlatAjout'];
+$requeteI = "INSERT INTO plat_allergene(id_plat_allergene, id_allergene_allergene) VALUES ((SELECT id_plat FROM plat WHERE nomPlat = ?), (SELECT id_allergene FROM allergene WHERE nomAllergene = ?))";
+	$req = $bdd->prepare($requeteI);
+	   $req->execute([$nomPlatAjout, $nomAllergeneAj]);}
+
+?>
+
+
+
 <br/>
 <button class="bouton"><a href="index.php">Accueil</a></button>
 </body>

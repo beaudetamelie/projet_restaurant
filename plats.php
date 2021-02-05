@@ -63,7 +63,7 @@ while ($donnees = $req->fetch())
 
 $requete42 = "SELECT * FROM plat WHERE type = ?";
 $req = $bdd->prepare($requete42);
-     $req->execute(['entree']);
+     $req->execute(['dessert']);
      while ($donnees = $req->fetch())
 {
        echo $donnees['nomPlat'] . ' ...........<b>' . $donnees['prix'] . ' euros</b><br/><i></i><br/>';

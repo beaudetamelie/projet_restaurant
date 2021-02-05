@@ -42,18 +42,18 @@ try
 		}
 		?></i></strong><br/>
 	<?php
-	$requete8 = ("SELECT prix FROM menu WHERE nomMenu = ? ");
+	$requete8 = ("SELECT prix_menu FROM menu WHERE nomMenu = ? ");
 	$req = $bdd->prepare($requete8);
 	$req->execute(['Tradition']);
 	while ($donnees = $req->fetch())
 		{	
-	       echo $donnees['prix'] . 'euros <br/><br/>';
+	       echo $donnees['prix_menu'] . 'euros <br/><br/>';
 		}
 ?>
 </p><p class="requete">
 <?php
 	//afficher plats contenu menu Tradition
- 	$requete9 = ("SELECT nomPlat FROM menu, plat_menu, plat WHERE menu.id_menu= plat_menu.id_menu AND  plat.id_plat = plat_menu.id_plat AND nomMenu = ?");
+ 	$requete9 = ("SELECT nomPlat FROM menu, plat_menu, plat WHERE menu.id_menu= plat_menu.id_menu_menu AND  plat.id_plat = plat_menu.id_plat_menu AND nomMenu = ?");
 	$req = $bdd->prepare($requete9);
 	$req->execute([ 'Tradition']);
 	while ($donnees = $req->fetch())
@@ -66,6 +66,7 @@ try
 <br/>
 	<button class="bouton"><a href="menu.php">Menu précédent</a></button>
 	<br/>
+	<button class="bouton"><a href="menu2.php">Tout les menus</a></button>
 	<br/>
 	<br/>
 <button class="bouton"><a href="index.php">Accès a l'accueil</a></button>
