@@ -26,24 +26,30 @@ try
 <html>
 <head>
 	<title>Autres menus à la carte</title>
-	<link rel="stylesheet" type="text/css" href='style.css'"  />
+	<link rel="stylesheet" type="text/css" href='style.css'  />
 </head>
 <body>
-	<h1>Tout les menus à la carte</h1><br/>
+	<h1>Tous les menus à la carte</h1><br/>
 	<?php
-	$requete100 = "SELECT DISTINCT nomMenu, prix_menu, nomPlat FROM menu, plat_menu, plat WHERE menu.id_menu= plat_menu.id_menu_menu AND  plat.id_plat = plat_menu.id_plat_menu ORDER BY nomMenu, FIELD (type,'entree', 'plat', 'dessert')";
-	$req = $bdd->prepare($requete100);
-	$req->execute();
-	//on affiche le prix
-       		
-	while ($donnees = $req->fetch())
+	$requeteNP = "SELECT id_menu,nomMenu, prix_menu FROM menu";
+	$reqNP = $bdd->prepare($requeteNP);
+	$reqNP->execute();
+
+		while ($donneesNP = $reqNP->fetch())
 		{
-			
-			echo '<br/>'.$donnees['nomMenu'] .'<br/>';
-			echo $donnees['prix_menu']. ' euros <br/>';
-       		echo $donnees['nomPlat'].'<br/>';
-			
-		}
+			echo '<br/>'.$donneesNP['nomMenu'] .'<br/>';
+			echo $donneesNP['prix_menu']. ' euros <br/>';
+
+
+			$requeteM = "SELECT  nomPlat FROM menu, plat_menu, plat WHERE menu.id_menu= plat_menu.id_menu_menu AND  plat.id_plat = plat_menu.id_plat_menu AND id_menu = ? GROUP BY nomPlat, nomMenu ORDER BY nomMenu, FIELD (type,'entree', 'plat', 'dessert') ";
+			$reqM = $bdd->prepare($requeteM);
+			$reqM->execute([$donneesNP['id_menu']]);
+			while ($donneesM = $reqM->fetch()){
+				echo $donneesM['nomPlat'].'<br/>';
+			}
+       		
+	}		
+		
 ?>
 <br/>
 <br/>
