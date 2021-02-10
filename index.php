@@ -15,7 +15,7 @@ Ouvert du mardi au samedi midi et soir - Pensez à réserver au 01 23 45 67 89<b
     width="1300px"
 /><br/><br/>
 <button class="bouton"><a href=plats.php>Plats individuels</a></button>
-<button class="bouton"><a href="menu.php">Menus</a></button><br/><br/>
+<button class="bouton"><a href="menu2.php">Menus</a></button><br/><br/>
 <button class="bouton"><a href="admin.php">Accès à l'administration</button>
 </body>
 </html>

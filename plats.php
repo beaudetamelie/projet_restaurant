@@ -88,7 +88,7 @@ while ($donnees = $req->fetch())
 ?>
 <br/>
 <button class="bouton"><a href=index.php>Accueil</a></button>
-<button class="bouton"><a href="menu.php">Menus</a></button>
+<button class="bouton"><a href="menu2.php">Menus</a></button>
 
 
 
