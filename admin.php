@@ -45,16 +45,30 @@ try
         <label for="type"class="form">Type de plat (entree/plat/dessert) :</label>
         <input type="text" id="type" name="type" >
     </div>
-    <br/>
+    <br/> 
     <div>
-        <label for="type"class="form">ID Allergène  (Oeuf = 4/Poisson = 3/Lait = 2/Arachide = 1) :</label>
-        <input type="text" id="id_allergene" name="id_allergene" >
-    </div>
+    <INPUT type="checkbox" name="nomAllergene" value="1"> Arachide
+    <INPUT type="checkbox" name="nomAllergene" value="2"> Lait
+    <INPUT type="checkbox" name="nomAllergene" value="3"> Poisson
+    <INPUT type="checkbox" name="nomAllergene" value="4"> Oeuf
+    <INPUT type="checkbox" name="nomAllergene" value="5"> Tomates
+    <INPUT type="checkbox" name="nomAllergene" value="6"> Crustacés
+    <INPUT type="checkbox" name="nomAllergene" value="7"> Blé
+    <INPUT type="checkbox" name="nomAllergene" value="8"> Légumineuses
+    <INPUT type="checkbox" name="nomAllergene" value="9"> Banane
+    <INPUT type="checkbox" name="nomAllergene" value="10"> Kiwi
+    <INPUT type="checkbox" name="nomAllergene" value="11"> Pommes de terre
+    <INPUT type="checkbox" name="nomAllergene" value="12"> Boeuf
+    <INPUT type="checkbox" name="nomAllergene" value="13"> Mangue
+    <br/>
+</div>
+   
     <br/>
     <div>
     	 <label for="type"class="form"></label>
         <input type="submit" id="valider" name="valider" >
      </div>
+
 </form>
 
 
@@ -64,13 +78,17 @@ $nomPlat = $_POST['nomPlat'];
 $prixPlat = $_POST['prixPlat'];
 $vegetarien = $_POST['vegetarien'];
 $type = $_POST['type'];
-$id_allergene = $_POST['id_allergene'];
+$nomAllergene = $_POST['nomAllergene'];
 
 //On prépare la commande sql d'insertion
-$requeteA = "INSERT INTO plat (id_plat,nomPlat, prix, vegetarien, type) VALUES(?, ?, ?, ?, ?)";
+$requeteA = "INSERT INTO plat(id_plat,nomPlat, prix, vegetarien, type) VALUES(?, ?, ?, ?, ?) ";
 $req = $bdd->prepare($requeteA);
-	   $req->execute([NULL, $nomPlat, $prixPlat,$vegetarien, $type]);
-}?>
+       $req->execute([NULL, $nomPlat, $prixPlat,$vegetarien, $type]);
+
+$requeteM ="INSERT INTO plat_allergene(id_plat_allergene, id_allergene_allergene) VALUES ((SELECT id_plat FROM plat WHERE nomPlat = ?), (SELECT id_allergene FROM allergene WHERE nomAllergene = ?))";
+$req = $bdd->prepare($requeteM);
+               $req->execute([$nomPlat, $nomAllergene]);}
+?>
 
 
 
@@ -314,13 +332,27 @@ $req = $bdd->prepare($requeteJ);
 
 
 
+<button class="bouton"><a href="index.php">Accueil</a></button>
+</body>
+</html>
 
-<p>Ajouter un allergène dans un plat</p>
+<!--<p>Ajouter un allergène dans un plat</p>
 <form action="admin.php" method="post"> 
-	 <div>
-        <label for="nomAllergeneAj" class="form">Nom de l'allergène :</label>
-        <input type="text" id="nomAllergeneAj" name="nomAllergeneAj" >
-    </div>
+	 
+    <INPUT type="checkbox" name="choix" value="1">  name="choix" value="2"> Lait
+    <INPUT type="checkbox" name="choix" value="3"> Poisson
+    <INPUT type="checkbox" name="choix" value="4"> Oeuf
+    <INPUT type="checkbox" name="choix" value="5"> Tomates
+    <INPUT type="checkbox" name="choix" value="6"> Crustacés
+    <INPUT type="checkbox" name="choix" value="7"> Blé
+    <INPUT type="checkbox" name="choix" value="8"> Légumineuses
+    <INPUT type="checkbox" name="choix" value="9"> Banane
+    <INPUT type="checkbox" name="choix" value="10"> Kiwi
+    <INPUT type="checkbox" name="choix" value="11"> Pommes de terre
+    <INPUT type="checkbox" name="choix" value="12"> Boeuf
+    <INPUT type="checkbox" name="choix" value="13"> Mangue
+    <br/>
+
     <br/>
 	<div>
         <label for="nomPlatAjout" class="form">Nom du plat :</label>
@@ -334,18 +366,16 @@ $req = $bdd->prepare($requeteJ);
      <br/>
 </form>
 <?php
-if (isset ($_POST['validerAjoutAllergenePlat'])){
-$nomAllergeneAj = $_POST['nomAllergeneAj'];
-$nomPlatAjout = $_POST['nomPlatAjout'];
-$requeteI = "INSERT INTO plat_allergene(id_plat_allergene, id_allergene_allergene) VALUES ((SELECT id_plat FROM plat WHERE nomPlat = ?), (SELECT id_allergene FROM allergene WHERE nomAllergene = ?))";
-	$req = $bdd->prepare($requeteI);
-	   $req->execute([$nomPlatAjout, $nomAllergeneAj]);}
+/*foreach($_POST['choix'] as $choix) {
+    if (isset ($_POST['validerAjoutAllergenePlat'])){
+        $nomPlatAjout = $_POST['nomPlatAjout'];
+        $requeteI = "INSERT INTO plat_allergene(id_plat_allergene, id_allergene_allergene) VALUES ((SELECT id_plat FROM plat WHERE nomPlat = ?), (SELECT id_allergene FROM allergene WHERE nomAllergene = ?))";
+        	$req = $bdd->prepare($requeteI);
+        	   $req->execute([$nomPlatAjout, $choix]);
+    }
+}
+?>-->
 
-?>
+*/
 
 
-
-<br/>
-<button class="bouton"><a href="index.php">Accueil</a></button>
-</body>
-</html>
