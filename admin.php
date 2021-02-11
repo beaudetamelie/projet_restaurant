@@ -164,7 +164,7 @@ $requeteA = "INSERT INTO plat(id_plat,nomPlat, prix, vegetarien, type) VALUES(?,
 $req = $bdd->prepare($requeteA);
        $req->execute([NULL, $nomPlat, $prixPlat,$vegetarien, $type]);
 
-$requeteM ="INSERT INTO plat_allergene(id_plat_allergene, id_allergene_allergene) VALUES ANY ((SELECT id_plat FROM plat WHERE nomPlat = ?), (SELECT id_allergene FROM allergene WHERE nomAllergene = ?))";
+$requeteM ="INSERT INTO plat_allergene(id_plat_allergene, id_allergene_allergene) VALUES  ((SELECT id_plat FROM plat WHERE nomPlat = ?), (SELECT id_allergene FROM allergene WHERE nomAllergene = ?))";
 
 
        $req = $bdd->prepare($requeteM);
